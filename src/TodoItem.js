@@ -1,4 +1,5 @@
 import './TodoItem.css';
+
 export function TodoItem({text, completed}) {
   return (
     <li className="TodoItem">
