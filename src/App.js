@@ -39,16 +39,24 @@ function App() {
       />
       <TodoList>
         {filteredTodos.map(todo => (
-          <TodoItem key={todo.text} text={todo.text} completed={todo.completed} onDelete={onDelete}/>
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onDelete={() => deleteTodo(todo.text)}
+          />
         ))}
       </TodoList>
       <CreateTodoButton/>
       </>
   );
-}
 
-function onDelete(key){
-  console.log('Borrando tarea: ', key);
+  function deleteTodo(key){
+    const newTodos = [...todos];
+    const todoIndex = todos.findIndex(todo => todo.text === key);
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  }
 }
 
 export default App;
