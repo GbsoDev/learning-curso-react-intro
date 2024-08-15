@@ -1,8 +1,6 @@
 import React from "react";
 
-export function TodoSearch() {
-  const [searchValue, setSearchValue] = React.useState('');
-  console.log('entrada', searchValue);
+export function TodoSearch({searchValue, setSearchValue}) {
   return (
     <input
       placeholder="mi tarea pendiente"
