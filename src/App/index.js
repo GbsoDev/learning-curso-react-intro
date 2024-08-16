@@ -1,11 +1,7 @@
 import './App.css';
 import React from 'react';
-import { CreateTodoButton } from '../Todo/CreateTodoButton';
-import { TodoCounter } from '../Todo/TodoCounter';
-import { TodoItem } from '../Todo/TodoItem';
-import { TodoList } from '../Todo/TodoList';
-import { TodoSearch } from '../Todo/TodoSearch';
 import { useLocalStorage } from './useLocalStorage';
+import { AppUi } from './AppUi';
 
 // const defaultTodos = [
 //   { text: 'Cortar cebolla', completed: false }, 
@@ -47,33 +43,19 @@ function App() {
 
   const newTodo = (text) => {
     const newTodos = [...todos];
-    newTodos.push({text, completed: false});
+    newTodos.push({ text, completed: false });
     saveTodos(newTodos);
   }
 
   return (
-    <>
-      <TodoCounter 
-        total={totalTodos} 
-        completed={completedTodos}
-      />
-      <TodoSearch 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue} 
-      />
-      <TodoList>
-        {filteredTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
-      <CreateTodoButton/>
-      </>
+    <AppUi 
+      searchValue = {searchValue}
+      setSearchValue = {setSearchValue}
+      filteredTodos = {filteredTodos}
+      totalTodos = {totalTodos}
+      completedTodos = {completedTodos}
+      onCompleteTodo = {completeTodo}
+      onDeleteTodo = {deleteTodo} />
   );
 }
 
