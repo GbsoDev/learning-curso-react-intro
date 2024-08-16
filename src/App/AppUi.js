@@ -6,7 +6,7 @@ import { TodoItem } from '../Todo/TodoItem';
 import { TodoList } from '../Todo/TodoList';
 import { TodoSearch } from '../Todo/TodoSearch';
 
-export function AppUi({searchValue, setSearchValue, filteredTodos, totalTodos, completedTodos, onCompleteTodo, onDeleteTodo}) {
+export function AppUi({searchValue, setSearchValue, filteredTodos, totalTodos, completedTodos, loading, error, onCompleteTodo, onDeleteTodo}) {
   return (
     <>
       <TodoCounter 
@@ -18,6 +18,9 @@ export function AppUi({searchValue, setSearchValue, filteredTodos, totalTodos, c
         setSearchValue={setSearchValue} 
       />
       <TodoList>
+        {loading && <p>Cargando...</p>}
+        {error && <p>Hubo un error...</p>}
+        {(!loading && !error && filteredTodos.length === 0) && <p>Crea tu primer TODO!</p>}
         {filteredTodos.map(todo => (
           <TodoItem
             key={todo.text}
