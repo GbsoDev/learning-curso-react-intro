@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
-import { CreateTodoButton } from './CreateTodoButton';
-import { TodoCounter } from './TodoCounter';
-import { TodoItem } from './TodoItem';
-import { TodoList } from './TodoList';
-import { TodoSearch } from './TodoSearch';
+import { CreateTodoButton } from './Todo/CreateTodoButton';
+import { TodoCounter } from './Todo/TodoCounter';
+import { TodoItem } from './Todo/TodoItem';
+import { TodoList } from './Todo/TodoList';
+import { TodoSearch } from './Todo/TodoSearch';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: false }, 
@@ -64,6 +64,12 @@ function App() {
     const todoIndex = todos.findIndex(todo => todo.text === key);
     updatedTodos[todoIndex].completed = !updatedTodos[todoIndex].completed;
     setTodos(updatedTodos);
+  }
+
+  function newTodo(text){
+    const newTodos = [...todos];
+    newTodos.push({text, completed: false});
+    setTodos(newTodos);
   }
 }
 
