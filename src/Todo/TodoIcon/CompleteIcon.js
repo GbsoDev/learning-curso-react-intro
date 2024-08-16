@@ -1,4 +1,4 @@
-import { TodoIcon } from "../Todo/TodoIcon";
+import { TodoIcon } from ".";
 
 export function CompleteIcon({ completed, onComplete }) {
   return (
