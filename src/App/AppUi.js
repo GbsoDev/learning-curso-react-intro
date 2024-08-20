@@ -8,8 +8,9 @@ import { TodoSearch } from '../Todo/TodoSearch';
 import { TodosLoading } from '../Todo/TodosLoading';
 import { TodosError } from '../Todo/TodosError';
 import { EmptyTodos } from '../Todo/EmptyTodos';
+import { TodoContext } from '../TodoContext';
 
-export function AppUi({ searchValue, setSearchValue, filteredTodos, totalTodos, completedTodos, loading, error, onCompleteTodo, onDeleteTodo }) {
+export function AppUi() {
   return (
     <>
       <TodoCounter
@@ -20,20 +21,30 @@ export function AppUi({ searchValue, setSearchValue, filteredTodos, totalTodos, 
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <TodoList>
-        {loading && <>  <TodosLoading /><TodosLoading /><TodosLoading /></>}
-        {error && <TodosError />}
-        {(!loading && !error && filteredTodos.length === 0) && <EmptyTodos />}
-        {filteredTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => onCompleteTodo(todo.text)}
-            onDelete={() => onDeleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
+      {/* Primera forma de acceder al TodoContext.Consumer */}
+      <TodoContext.Consumer>
+        {({
+          filteredTodos,
+          loading,
+          error,
+          completeTodo,
+          deleteTodo
+        }) =>
+        (<TodoList>
+          {loading && <>  <TodosLoading /><TodosLoading /><TodosLoading /></>}
+          {error && <TodosError />}
+          {(!loading && !error && filteredTodos.length === 0) && <EmptyTodos />}
+          {filteredTodos.map(todo => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+            />
+          ))}
+        </TodoList>)}
+      </TodoContext.Consumer>
       <CreateTodoButton />
     </>
   );
