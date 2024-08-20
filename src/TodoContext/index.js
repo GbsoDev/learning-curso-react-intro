@@ -51,7 +51,8 @@ function TodoProvider({ children }) {
                 completeTodo,
                 deleteTodo,
                 modalState,
-                setModalState
+                setModalState,
+                newTodo
             }
         }>
             {children}

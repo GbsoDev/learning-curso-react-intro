@@ -10,6 +10,7 @@ import { TodosError } from '../Todo/TodosError';
 import { EmptyTodos } from '../Todo/EmptyTodos';
 import { TodoContext } from '../TodoContext';
 import { Modal } from '../Modal';
+import { TodoForm } from '../Todo/TodoForm';
 
 export function AppUi() {
   const {
@@ -23,12 +24,12 @@ export function AppUi() {
   } = useContext(TodoContext);
   return (
     <>
-      <TodoCounter/>
-      <TodoSearch/>
+      <TodoCounter />
+      <TodoSearch />
       <TodoList>
-        {loading && <><TodosLoading/><TodosLoading/><TodosLoading/></>}
-        {error && <TodosError/>}
-        {(!loading && !error && todos.length === 0) && <EmptyTodos/>}
+        {loading && <><TodosLoading /><TodosLoading /><TodosLoading /></>}
+        {error && <TodosError />}
+        {(!loading && !error && todos.length === 0) && <EmptyTodos />}
         {filteredTodos.map(todo => (
           <TodoItem
             key={todo.text}
@@ -39,10 +40,10 @@ export function AppUi() {
           />
         ))}
       </TodoList>
-      <CreateTodoButton/>
-      {modalState && 
+      <CreateTodoButton />
+      {modalState &&
         <Modal>
-        ESTE ES MI MODAL
+          <TodoForm />
         </Modal>
       }
     </>
